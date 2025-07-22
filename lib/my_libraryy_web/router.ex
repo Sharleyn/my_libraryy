@@ -18,7 +18,7 @@ defmodule MyLibraryyWeb.Router do
   end
 
   scope "/", MyLibraryyWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_admin]
 
     get "/", PageController, :home
 
