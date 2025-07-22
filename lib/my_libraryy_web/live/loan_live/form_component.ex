@@ -67,20 +67,21 @@ defmodule MyLibraryyWeb.LoanLive.FormComponent do
     end
   end
 
-  defp save_loan(socket, :new, loan_params) do
-    case Library.create_loan(loan_params) do
+  defp save_loan(socket, :edit, loan_params) do
+    case Library.update_loan(socket.assigns.loan, loan_params) do
       {:ok, loan} ->
         notify_parent({:saved, loan})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Loan created successfully")
+         |> put_flash(:info, "Loan update successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
+
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 
