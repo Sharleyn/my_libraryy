@@ -69,6 +69,46 @@ defmodule MyLibraryyWeb.AdminSettingsLive do
           </:actions>
         </.simple_form>
       </div>
+
+
+      <div>
+        <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Profile Information</h3>
+        <.simple_form
+          for={@profile_form}
+          id="profile_form"
+          phx-submit="update_profile"
+          phx-change="validate_profile"
+        >
+          <.input field={@profile_form[:full_name]} type="text" label="Full Name" required />
+          <.input
+            field={@profile_form[:ic]}
+            type="text"
+            label="IC Number"
+            placeholder="123456789012"
+            required
+          />
+          <.input
+            field={@profile_form[:status]}
+            type="select"
+            label="Status"
+            options={[{"Active", "active"}, {"Inactive", "inactive"}, {"Pending", "pending"}]}
+            required
+          />
+          <.input
+            field={@profile_form[:phone]}
+            type="text"
+            label="Phone Number"
+            placeholder="+60123456789"
+          />
+          <.input field={@profile_form[:date_of_birth]} type="date" label="Date of Birth" />
+          <.input field={@profile_form[:address]} type="textarea" label="Address" rows="3" />
+          <:actions>
+            <.button phx-disable-with="Saving...">
+              {if @current_profile, do: "Update Profile", else: "Create Profile"}
+            </.button>
+          </:actions>
+        </.simple_form>
+      </div>
     </div>
     """
   end
