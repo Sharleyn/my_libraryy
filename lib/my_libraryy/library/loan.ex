@@ -3,14 +3,17 @@ defmodule MyLibraryy.Library.Loan do
   import Ecto.Changeset
 
 
+  alias MyLibraryy.Accounts.User
+  alias MyLibraryy.Library.Book
+
   schema "loans" do
     field :borrowed_at, :date
     field :due_at, :date
     field :returned_at, :date
 
 
-    belongs_to :user, MyLibraryy.Accounts.User
-    belongs_to :book, MyLibraryy.Library.Book
+    belongs_to :user, User
+    belongs_to :book, Book
 
     timestamps(type: :utc_datetime)
   end

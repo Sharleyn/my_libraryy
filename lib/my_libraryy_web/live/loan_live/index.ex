@@ -6,7 +6,7 @@ defmodule MyLibraryyWeb.LoanLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :loans, MyLibraryy.list_loans(preload: [:user, :book]))}
+    {:ok, stream(socket, :loans, Library.list_loans(preload: [:user, :book]))}
   end
 
   @impl true
